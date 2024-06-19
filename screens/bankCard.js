@@ -12,7 +12,9 @@ const BankCard = () => {
 
         <Image source={require('../assets/bankIcon.png')}/>
         <Text style={styles.bankName}>HDFC Bank</Text>
+        <View style={styles.paymentInfo}>
         <Text style={styles.paymentDelayed}>Payment Delayed</Text>
+        </View>
       </View>
       <Text style={styles.customerName}>Alok Kumar</Text>
       <Text style={styles.utr}>UTR Reference No: 8392039329301</Text>
@@ -34,8 +36,8 @@ const styles = StyleSheet.create({
 
 
   container: {
-    paddingHorizontal: 4,
-    paddingVertical: 16,
+    paddingHorizontal: 8,
+    paddingVertical: 12,
     backgroundColor: "blue",
     width: 400,
     shadowColor:'black',
@@ -50,13 +52,17 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize:14,
     fontWeight:'bold',
+    marginHorizontal: 5, 
+  },
+  paymentInfo: {
+    borderRadius: 10,
+    marginHorizontal: 5, 
+    overflow: 'hidden'
   },
   paymentDelayed:{
     color:'red',
     backgroundColor: 'yellow',
     padding: 5,
-    borderRadius:10,
-
   },
   customerName:{
     color: "white",
