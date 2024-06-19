@@ -1,5 +1,5 @@
 import { Button, Pressable, StyleSheet, Text, View, Image } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Entypo';
 
 export default function RatecardButton() {
 
@@ -10,7 +10,7 @@ export default function RatecardButton() {
   return (
     <Pressable style={styles.container} onPress={handlePress}>
         <Text style={styles.ratecard}>Rate Card</Text>
-        <Icon style={styles.arrow} name="chevron-right" size={20}/>
+        <Icon style={styles.arrow} name="chevron-thin-right" size={20}/>
     </Pressable>
     );
 }
