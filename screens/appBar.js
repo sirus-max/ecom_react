@@ -19,13 +19,13 @@ const AppBar = ({
 };
 const styles = StyleSheet.create({
   container:{
-    height: "20%",
+    height: 170,
   },
 
   appBar: {
    
     width: "100vw",
-    paddingTop:'20%',
+    paddingTop:80,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

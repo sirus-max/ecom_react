@@ -115,11 +115,10 @@ export default function App() {
 }
 const styles = StyleSheet.create({
   container: {
-        position:'absolute',
-        top:'15%',
-        flex: 1,
+      flexDirection:'column',
+        justifyContent:'center',
+        marginTop:-40,
         alignItems: 'center',
-        justifyContent: 'center',
       },
   navbar: {
     backgroundColor: "#FFFFFF",

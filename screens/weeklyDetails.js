@@ -1,15 +1,13 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { useEffect, useState } from "react";
 import React from "react";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
-
+import fetchRandomNumbers from "../API/randomNumber";
 import GraphBar from "./widgets/graphBar";
 
-const WeeklyDetails = () => {
-  const [index, setIndex] = useState(0);
-
-  let barColor = "#D1E0FF";
+const WeeklyDetails =  () => {
+  
   let weekly_earnings_data = [
     ["12-18 Feb", 110],
     ["20-26 Feb", 90],
@@ -17,15 +15,44 @@ const WeeklyDetails = () => {
     ["6-12 Mar", 80],
     ["Curr Week", 50],
   ];
+
+  const [index, setIndex] = useState(0)
+  const [loading, setLoading] = useState(true)
+  const [arr, setArr]  = useState(weekly_earnings_data)
+
+
+  const loadData = async () => {
+    if(loading){
+    randomNumbers = await  fetchRandomNumbers();
+
+    const arrcopy =  [...weekly_earnings_data]
+     for ( i = 0 ; i < 5 ; i++){
+      arrcopy[i][1] = randomNumbers[i];
+     }
+     setLoading(false);
+     setArr(arrcopy);
+    }
+
+  }
+
+  loadData();
+  
+
+
+
+  let barColor = "#D1E0FF";
+  
   function handleLeftArrowPressed(){
     console.log("left arrow pressed");
+    
+
     if(index > 0)
       setIndex(index - 1);
     console.log("index",index);
   }
 
   function handleRightArrowPressed(){
-    console.log("left arrow pressed");
+    console.log("right arrow pressed");
     if(index < 4)
       setIndex(index + 1);
     console.log("index",index);
@@ -37,7 +64,7 @@ const WeeklyDetails = () => {
         <MaterialIcons name="keyboard-arrow-left" size={36} color="black" />
         </TouchableOpacity>
         <Text style={{ fontSize: 20, fontWeight: "500", width:100, textAlign:'center' }}>
-          {weekly_earnings_data[index][0]}
+          {arr[index][0]}
         </Text>
         <TouchableOpacity onPress={() => handleRightArrowPressed()}>
         <MaterialIcons name="keyboard-arrow-right" size={36} color="black" />
@@ -45,11 +72,12 @@ const WeeklyDetails = () => {
       </View>
 
       <View>
-        <Text style={styles.amount}>₹{weekly_earnings_data[index][1]}</Text>
+        <Text style={styles.amount}>₹{arr[index][1]}</Text>
       </View>
 
       <View style={styles.graph}>
-      {weekly_earnings_data.map((item, ind) => {
+        {loading && <Image source={require('../assets/scooter.png')}/>}
+      {!loading && weekly_earnings_data.map((item, ind) => {
                 const barColor = ind === index ? "#24247A" : "#D1E0FF"  ; // Conditional color
                 return (
                     <GraphBar 
