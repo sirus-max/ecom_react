@@ -21,21 +21,35 @@ const WeeklyDetails =  () => {
   const [arr, setArr]  = useState(weekly_earnings_data)
 
 
-  const loadData = async () => {
-    if(loading){
-    randomNumbers = await  fetchRandomNumbers();
 
+  useEffect( () => {
+
+
+    const delay = async () => {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      func();
+    };
+  
+
+
+    async function func(){
+    randomNumbers = await fetchRandomNumbers();
     const arrcopy =  [...weekly_earnings_data]
-     for ( i = 0 ; i < 5 ; i++){
-      arrcopy[i][1] = randomNumbers[i];
-     }
-     setLoading(false);
-     setArr(arrcopy);
+    for ( i = 0 ; i < 5 ; i++){
+     arrcopy[i][1] = randomNumbers[i];
     }
+    await delay();
+    setLoading(false);
+    setArr(arrcopy);
 
   }
+  func();
 
-  loadData();
+
+  }, [])
+
+
+
   
 
 
@@ -64,7 +78,7 @@ const WeeklyDetails =  () => {
         <MaterialIcons name="keyboard-arrow-left" size={36} color="black" />
         </TouchableOpacity>
         <Text style={{ fontSize: 20, fontWeight: "500", width:100, textAlign:'center' }}>
-          {arr[index][0]}
+          {loading ? "Loading" : arr[index][0]}
         </Text>
         <TouchableOpacity onPress={() => handleRightArrowPressed()}>
         <MaterialIcons name="keyboard-arrow-right" size={36} color="black" />
@@ -72,7 +86,9 @@ const WeeklyDetails =  () => {
       </View>
 
       <View>
-        <Text style={styles.amount}>₹{arr[index][1]}</Text>
+        <Text style={styles.amount}>
+          { loading ? "Loading" :  "₹" + arr[index][1].toString() }
+      </Text>
       </View>
 
       <View style={styles.graph}>

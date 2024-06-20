@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import LinearGradient from 'react-native-linear-gradient';
+
 const BankCard = () => {
   return (
     // <LinearGradient colors={['#4C669F', '#3B5998', '#192F6A']}>
@@ -30,6 +30,10 @@ const BankCard = () => {
     </>
   );
 };
+
+
+
+
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 4,
